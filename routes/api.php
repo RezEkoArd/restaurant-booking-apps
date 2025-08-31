@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/', [MenuController::class, 'index']);
         Route::get('/{id}', [MenuController::class, 'show']);
 
-        Route::middleware('role:Kasir')->group(function () {
+        Route::middleware('role:Pelayan')->group(function () {
             Route::post('/', [MenuController::class, 'store']);
             Route::put('/{id}', [MenuController::class, 'update']);
             Route::delete('/{id}', [MenuController::class, 'destroy']);
