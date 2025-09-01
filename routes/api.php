@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\TableController;
 use Illuminate\Http\Request;
 
@@ -36,6 +37,21 @@ Route::middleware('auth:sanctum')->group(function () {
         // Close Order
         Route::patch('/{id}/close', [OrderController::class, 'closeOrder'])->name('orders.close');
         Route::get('/{id}/payment', [OrderController::class, 'calculatedPayment'])->name('orders.payment');
+    });
+
+    Route::prefix('receipts')->group(function () {
+        //Download receipt
+        // Download receipt PDF untuk single order
+        Route::get('/order/{orderId}/download', [ReceiptController::class, 'downloadReceipt'])
+            ->name('receipt.download');
+
+        // Preview receipt PDF di browser
+        Route::get('/order/{orderId}/preview', [ReceiptController::class, 'previewReceipt'])
+            ->name('receipt.preview');
+
+        // Get receipt data dalam format JSON (untuk API)
+        Route::get('/order/{orderId}/data', [ReceiptController::class, 'getReceiptJson'])
+            ->name('receipt.json');
     });
 
     // Menu prefix Menu
