@@ -10,4 +10,14 @@ class Table extends Model
         'table_no',
         'status'
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function currentOrder()
+    {
+        return $this->hasOne(Order::class)->where('status', 'open');
+    }
 }

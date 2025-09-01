@@ -26,4 +26,14 @@ class Menu extends Model
     {
         return $query->where('name', 'like', '%' . $search . '%');
     }
+
+
+    /**
+     * RelationShip Table
+     */
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItems::class);
+    }
 }
