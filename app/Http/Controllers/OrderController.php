@@ -89,7 +89,7 @@ class OrderController extends Controller
             $table->update(['status' => 'occupied']);
 
             return response()->json([
-                'success' => false,
+                'success' => true,
                 'message' => 'Order Opened successfully',
                 'data' => $order->load(['table', 'user'])
             ], 201);
